@@ -1,0 +1,28 @@
+version: "1"
+services:
+  #Postgres-----------------------------------------------#
+
+  postgres:
+    image: postgres:14
+    logging:
+      options:
+        max-size: "10m"
+    container_name: postgresAlacrity
+    volumes:
+      - ./volumes/postgres/data/db/postgres:/var/lib/postgresql/data
+      - ./volumes/postgres/data/db/scripts/sh:/data/db/scripts/sh/
+      - ./volumes/postgres/data/db/backup:/data/db/backup
+      - ./volumes/postgres/tools/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: alacrity
+    ports:
+      - 5432:5432
+    networks:
+      - interactive
+
+#Networks-----------------------------------------------#
+networks:
+  interactive:
+

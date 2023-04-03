@@ -1,0 +1,21 @@
+server:
+  port: 8885
+spring:
+  flyway:
+    baseline-on-migrate: true
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/alacrity
+    username: root
+    password: root
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
