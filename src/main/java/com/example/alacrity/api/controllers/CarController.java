@@ -1,5 +1,6 @@
 package com.example.alacrity.api.controllers;
 
+import com.example.alacrity.api.controllers.dto.CarDto;
 import com.example.alacrity.api.controllers.dto.CarsDetailed;
 import com.example.alacrity.api.entities.Car;
 import com.example.alacrity.api.services.CarService;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/car")
@@ -37,5 +40,10 @@ public class CarController {
     public Car getCar(@PathVariable Long id)
             throws ResourceNotFoundException {
         return carService.getCar(id);
+    }
+
+    @PostMapping
+    public Car createCar(@Valid @RequestBody CarDto carDto) {
+        return carService.createCar(carDto);
     }
 }

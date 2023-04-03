@@ -1,5 +1,6 @@
 package com.example.alacrity.api.services;
 
+import com.example.alacrity.api.controllers.dto.CarDto;
 import com.example.alacrity.api.controllers.dto.CarsDetailed;
 import com.example.alacrity.api.entities.Car;
 import com.example.alacrity.api.repositories.CarRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -58,5 +60,13 @@ public class CarService {
         carsDetailed.setMostExpensiveCar(mostExpensiveCar);
         carsDetailed.setAveragePrice(averagePrice);
         return carsDetailed;
+    }
+
+    public Car createCar(CarDto carDto) {
+        Car car = new Car();
+        car.setMake(carDto.getMake());
+        car.setPrice(BigDecimal.valueOf(carDto.getPrice()));
+        car.setYearOfManufacture(carDto.getYearOfManufacture());
+        return carRepository.save(car);
     }
 }
